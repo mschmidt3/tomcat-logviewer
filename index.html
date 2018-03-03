@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Log files</title>
+<%
+   def logdir = context.getInitParameter("logdir")
+   def files = ['catalina.out', 'dummy.log']
+%>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr><th> Name </th></tr>
+            </thead>
+            <tbody>
+                <% files.each { fname -> %>
+                <tr><td><a href="showlog.groovy?file=<%= fname %>" ><%= fname %></a></td></tr>
+                <% } %>
+            </tbody>
+        </table>
+    </body>
+</html>
