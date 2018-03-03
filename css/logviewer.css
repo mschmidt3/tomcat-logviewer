@@ -24,4 +24,6 @@ code:before{
     -webkit-user-select: none;
 }
 
-
+.debuginfo  {
+    visibility: hidden;
+}
