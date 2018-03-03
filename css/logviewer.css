@@ -1,0 +1,27 @@
+
+table.logfiles td.size {
+    text-align: right;
+}
+
+pre{
+    counter-reset: line;
+}
+code{
+    counter-increment: line;
+    
+}
+code:before{
+      content: counter(line);
+      display: inline-block;
+      border-right: 1px solid #ddd;
+      padding: 0 .5em;
+      margin-right: .5em;
+      color: #888;
+      width: 4em;
+      text-align: right;
+}
+code:before{
+    -webkit-user-select: none;
+}
+
+

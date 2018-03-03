@@ -16,11 +16,13 @@ println """
     <div class="fileinfo">${fname}</div>
     <div class="debuginfo"> ${request}, ${params}, ${context.getInitParameter("logdir")} </div>
     <div class="showfile">
-    <pre>
+    <pre class="filecontent">
 """
   def f = new File(filepath)
   if(f.exists()){
-      println f.text
+      f.eachLine{
+        println "<code>${it}</code>"
+      }
   } else {
       println "File: '${filepath}'  not found"
   }

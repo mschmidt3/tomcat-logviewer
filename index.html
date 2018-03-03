@@ -4,18 +4,37 @@
         <link rel="stylesheet" href="css/logviewer.css"></link>
         <script src="js/logviewer.js" ></script>
 <%
-   def logdir = context.getInitParameter("logdir")
-   def files = ['catalina.out', 'dummy.log']
+    def logdir = context.getInitParameter("logdir")
+    def filelist  = []
+    def hideFiles = ['catalina.pid']
+
+    def dir = new File(logdir)
+    if(!dir.exists()){
+        println "listFiles: directory ${logDirectory} does not exist"
+    }             
+    dir.eachFile {
+        if( hideFiles.contains( it.name ) ){
+            //log.debug "file '$it' is hidden"
+        } else {
+            filelist << it
+        }
+    }            
 %>
     </head>
     <body>
-        <table>
+        <table class="logfiles">
             <thead>
-                <tr><th> Name </th></tr>
+                <tr>
+                    <th class="filename"> Name </th>
+                    <th class="size"> Size </th>
+                </tr>
             </thead>
             <tbody>
-                <% files.each { fname -> %>
-                <tr><td><a href="showlog.groovy?file=<%= fname %>" ><%= fname %></a></td></tr>
+                <% filelist.each { f -> %>
+                <tr>
+                    <td class="filename" ><a href="showlog.groovy?file=<%= f.name %>" ><%= f.name %></a></td>
+                    <td class="size" ><%= f.length() %></td>
+                </tr>
                 <% } %>
             </tbody>
         </table>
