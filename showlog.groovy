@@ -9,6 +9,8 @@ println """
 <html>
   <head>
     <title>${fname}</title>
+    <link rel="stylesheet" href="css/logviewer.css"></link>
+    <script src="js/logviewer.js" ></script>
   </head>
   <body>
     <div class="fileinfo">${fname}</div>
