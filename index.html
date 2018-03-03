@@ -32,7 +32,7 @@
             <tbody>
                 <% filelist.each { f -> %>
                 <tr>
-                    <td class="filename" ><a href="showlog.groovy?file=<%= f.name %>" ><%= f.name %></a></td>
+                    <td class="filename" ><a href="showlog.groovy?file=<%= f.name %>&highlight=#end" ><%= f.name %></a></td>
                     <td class="size" ><%= f.length() %></td>
                 </tr>
                 <% } %>

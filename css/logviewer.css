@@ -24,6 +24,14 @@ code:before{
     -webkit-user-select: none;
 }
 
-.debuginfo  {
+.debuginfo {
     visibility: hidden;
+}
+
+.highlight {
+    background: yellow;
+}
+
+.fileinfo {
+    font-weight: bold;
 }

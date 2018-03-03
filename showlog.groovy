@@ -4,6 +4,7 @@ def fname     = "${params.file}"
 def lines     = "${params.lines}"
 def firstline = "${params.firstline}"
 def filepath  = "${logdir}/${fname}"
+def highlight = "${params.highlight}".split(',')
 
 println """
 <html>
@@ -14,20 +15,24 @@ println """
   </head>
   <body>
     <div class="fileinfo">${fname}</div>
-    <div class="debuginfo"> ${request}, ${params}, ${context.getInitParameter("logdir")} </div>
-    <div class="showfile">
-    <pre class="filecontent">
+<!--    <div class="debuginfo"> ${request}, ${params}, ${context.getInitParameter("logdir")} </div>  -->
+    <a href="#end">end</a>
+    <div class="showfile"><a id="start" /><pre class="filecontent">
 """
   def f = new File(filepath)
   if(f.exists()){
-      f.eachLine{
-        println "<code>${it}</code>"
+      f.eachLine{ line ->
+        highlight.each{
+            line = line.replaceAll(it, "<span class=\"highlight\">${it}</span>")
+        }
+        println "<code>${line}</code>"
       }
   } else {
       println "File: '${filepath}'  not found"
   }
 println """
     </pre>
+    <a id="end" ></a>
     </div>
   </body>
 </html>
