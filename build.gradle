@@ -26,11 +26,7 @@ dependencies {
 
 war {
     from ("src/main/web-app/") {
-        include 'index.html'
-        into '/'
-    }
-    from ("src/main/web-app/") {
-        include 'info.jsp'
+        include 'index.html', 'showlog.groovy'
         into '/'
     }
     from ("src/main/web-app/WEB-INF") {
