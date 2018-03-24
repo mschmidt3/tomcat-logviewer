@@ -3,3 +3,5 @@
 deploy
 *.log
 *.jar
+.gradle
+build/

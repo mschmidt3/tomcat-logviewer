@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven { url "${repo}" }
+    }
+    dependencies {
+        classpath "com.netflix.nebula:gradle-ospackage-plugin:4.8.0"
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { url "${repo}" }
+}
+
+apply plugin:"war"
+apply plugin:'nebula.rpm'
+
+configurations {
+    binaries
+}
+
+dependencies {
+    binaries group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.14'
+}
+
+war {
+    from ("src/main/web-app/") {
+        include 'index.html'
+        into '/'
+    }
+    from ("src/main/web-app/") {
+        include 'info.jsp'
+        into '/'
+    }
+    from ("src/main/web-app/WEB-INF") {
+        include 'web.xml'
+        into '/WEB-INF/'
+    }
+    from (configurations.binaries){
+        into '/WEB-INF/lib/'
+    }
+
+    archiveName = "logviewer.war"
+}
