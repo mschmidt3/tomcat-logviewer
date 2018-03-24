@@ -29,6 +29,14 @@ war {
         include 'index.html', 'showlog.groovy'
         into '/'
     }
+    from ("src/main/web-app/js/") {
+        include 'logviewer.js'
+        into '/js/'
+    }
+    from ("src/main/web-app/css/") {
+        include 'logviewer.css'
+        into '/css/'
+    }
     from ("src/main/web-app/WEB-INF") {
         include 'web.xml'
         into '/WEB-INF/'
