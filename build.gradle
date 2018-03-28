@@ -8,7 +8,7 @@ buildscript {
     }
 }
 
-version="0.9.0"
+version="0.9.1"
 
 repositories {
     mavenLocal()
@@ -36,7 +36,7 @@ war {
     from ("src/main/web-app/") {
         include 'about.html'
         into '/'
-        expand appversion: "0.9.0"
+        expand appversion: "${version}"
     }
 
 
