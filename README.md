@@ -40,7 +40,7 @@ TODOs
 Changes:
 =========================================
 
-28.03.2018:  back-link, about page, prohibit relative path names
-24.03.2018:  build with gradle,  ad js and css
-03.03.2018:  list and display logfiles  
+* 28.03.2018:  back-link, about page, prohibit relative path names
+* 24.03.2018:  build with gradle,  ad js and css
+* 03.03.2018:  list and display logfiles  
 
