@@ -8,6 +8,8 @@ buildscript {
     }
 }
 
+version="0.9.0"
+
 repositories {
     mavenLocal()
     maven { url "${repo}" }
@@ -25,10 +27,19 @@ dependencies {
 }
 
 war {
+
     from ("src/main/web-app/") {
         include 'index.html', 'showlog.groovy'
         into '/'
     }
+
+    from ("src/main/web-app/") {
+        include 'about.html'
+        into '/'
+        expand appversion: "0.9.0"
+    }
+
+
     from ("src/main/web-app/js/") {
         include 'logviewer.js'
         into '/js/'
