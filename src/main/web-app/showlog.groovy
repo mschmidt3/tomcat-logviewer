@@ -6,6 +6,11 @@ def firstline = "${params.firstline}"
 def filepath  = "${logdir}/${fname}"
 def highlight = "${params.highlight}".split(',')
 
+if(fname.contains('..')){
+    response.status=404
+    println "File: '${fname}'  not found"
+} else {
+
 println """
 <html>
   <head>
@@ -16,9 +21,11 @@ println """
   <body>
     <div class="fileinfo">${fname}</div>
 <!--    <div class="debuginfo"> ${request}, ${params}, ${context.getInitParameter("logdir")} </div>  -->
-    <a href="#end">end</a>
-    <div class="showfile"><a id="start" /><pre class="filecontent">
-"""
+    <a id="top" ></a>
+    <a href="#end">jump to end</a>
+    <a href="./">back to index</a>
+    <div class="showfile"><a id="start" /><pre class="filecontent">"""
+
   def f = new File(filepath)
   if(f.exists()){
       f.eachLine{ line ->
@@ -28,12 +35,16 @@ println """
         println "<code>${line}</code>"
       }
   } else {
-      println "File: '${filepath}'  not found"
+      println "File: '${fname}'  not found"
   }
-println """
-    </pre>
+
+println """</pre>
     <a id="end" ></a>
+    <a href="#top">jump to top</a>
+    <a href="./">back to index</a>
     </div>
   </body>
 </html>
 """
+
+}

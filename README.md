@@ -30,6 +30,6 @@ TODOs
 * back to list-link in showlog.groovy
 * input fiels for highlight
 * first and lastline parameters in showlog.groovy
-* check that logfile is in selected path
+* check that logfile is in selected path (X)
 * download-all logfiles
-* about-seite mit version
+* about-seite mit version (X)

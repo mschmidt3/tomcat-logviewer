@@ -11,14 +11,14 @@
     def dir = new File(logdir)
     if(!dir.exists()){
         println "listFiles: directory ${logDirectory} does not exist"
-    }             
+    }
     dir.eachFile {
         if( hideFiles.contains( it.name ) ){
             //log.debug "file '$it' is hidden"
         } else {
             filelist << it
         }
-    }            
+    }
 %>
     </head>
     <body>
@@ -38,5 +38,10 @@
                 <% } %>
             </tbody>
         </table>
+
+        <hr>
+        <div class="indexlinks">
+            <a href="./about.html">about</a>
+        </div>
     </body>
 </html>

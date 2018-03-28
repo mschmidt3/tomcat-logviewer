@@ -8,7 +8,7 @@ buildscript {
     }
 }
 
-version="0.9.1"
+version="0.9.9"
 
 repositories {
     mavenLocal()
@@ -23,7 +23,7 @@ configurations {
 }
 
 dependencies {
-    binaries group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.14'
+    binaries group: 'org.codehaus.groovy', name: 'groovy-all', version: "${groovyVersion}"
 }
 
 war {
@@ -58,3 +58,38 @@ war {
 
     archiveName = "logviewer.war"
 }
+
+
+task rpm(type:Rpm){
+    description "Create logviewer rpm file"
+    // def basedir = "/usr/share/tomcat/webapps/"
+    def basedir = "/opt/webapps/tomcat-logviewer"
+    def rpmPackager = System.getenv('JOB_NAME') ? "Jenkins: ${System.getenv('JOB_NAME')}" :  "gradle (local)"
+    packageName "tomcat-logviewer"
+    release "${rpmRelease}"
+
+    user            "tomcat"
+    permissionGroup "tomcat"
+    vendor          ""
+    provides        "logviewer"
+    arch            "NOARCH"
+    type            "BINARY"
+    os              "LINUX"
+    packageGroup    "Applications/Tomcat"
+    license         "ASL 2.0"
+    packager        "${rpmPackager}"
+    summary         "tomcat log viewer in groovy"
+    packageDescription """A Tomcat logviewer written in groovy.
+There is no source repository. All functionality is in readable form in the war file.
+Link file ${basedir}/logviewer.war to your tomcat webapps directory.
+"""
+    requires ('tomcat', '6.0', GREATER )
+
+    from( "${buildDir}/libs/logviewer.war" ){
+        into "${basedir}/"
+        addParentDirs false
+        createDirectoryEntry true
+    }
+
+}
+rpm.dependsOn war
