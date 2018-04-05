@@ -7,7 +7,7 @@ A logviewer-webapp written in groovy
 Configuration:
 ----------------
 
-the default configuration 
+the default configuration
 
 * in web.xml
 
@@ -27,7 +27,7 @@ export PATH=$GRADLE_HOME/bin:$PATH
 TODOs
 =========================================
 
-* (Basic-) Security configured in web.xml
+* (Basic-) Security configured in web.xml (X)
 * Support for multiple log dirs
 * back to list-link in showlog.groovy (X)
 * input field for highlight
@@ -40,7 +40,7 @@ TODOs
 Changes:
 =========================================
 
+* 05.04.2018:  basic-security - requires role logviewer
 * 28.03.2018:  back-link, about page, prohibit relative path names
 * 24.03.2018:  build with gradle,  ad js and css
-* 03.03.2018:  list and display logfiles  
-
+* 03.03.2018:  list and display logfiles

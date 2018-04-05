@@ -1,10 +1,14 @@
 
-def logdir = context.getInitParameter("logdir")
-def fname     = "${params.file}"
-def lines     = "${params.lines}"
-def firstline = "${params.firstline}"
-def filepath  = "${logdir}/${fname}"
-def highlight = "${params.highlight}".split(',')
+String  logdir 	  = context.getInitParameter("logdir")
+String  fname     = "${params.file}"
+Integer lines     = -1 // "${params.lines}"
+Integer firstline = 1
+String  filepath  = "${logdir}/${fname}"
+def  highlight    = "${params.highlight}".split(',')
+
+if(params.filepath && params.firstline.isInteger()){
+	firstline = params.firstline.toInteger()
+}
 
 if(fname.contains('..')){
     response.status=404
@@ -28,7 +32,7 @@ println """
 
   def f = new File(filepath)
   if(f.exists()){
-      f.eachLine{ line ->
+      f.eachLine(firstline){ line ->
         highlight.each{
             line = line.replaceAll(it, "<span class=\"highlight\">${it}</span>")
         }
